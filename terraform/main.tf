@@ -22,15 +22,15 @@ module "hub_network" {
   resource_group_name = azurerm_resource_group.vnet.name
   location            = var.location
   vnet_name           = var.hub_vnet_name
-  address_space       = ["192.0.0.0/22"]
+  address_space       = ["10.0.0.0/22"]
   subnets = [
     {
       name : "AzureFirewallSubnet"
-      address_prefixes : ["192.0.0.0/24"]
+      address_prefixes : ["10.0.0.0/24"]
     },
     {
       name : "jumpbox-subnet"
-      address_prefixes : ["192.0.1.0/24"]
+      address_prefixes : ["10.0.1.0/24"]
     }
   ]
 }
@@ -40,11 +40,11 @@ module "kube_network" {
   resource_group_name = azurerm_resource_group.kube.name
   location            = var.location
   vnet_name           = var.kube_vnet_name
-  address_space       = ["192.0.4.0/22"]
+  address_space       = ["10.0.4.0/22"]
   subnets = [
     {
       name : "aks-subnet"
-      address_prefixes : ["192.0.5.0/24"]
+      address_prefixes : ["10.0.5.0/24"]
     }
   ]
 }

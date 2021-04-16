@@ -1,11 +1,11 @@
 variable "location" {
   description = "The resource group location"
-  default     = "southeastasia"
+  default     = "West Europe"
 }
 
 variable "vnet_resource_group_name" {
   description = "The resource group name to be created"
-  default     = "fwnetworks"
+  default     = "networks"
 }
 
 variable "hub_vnet_name" {
@@ -20,12 +20,12 @@ variable "kube_vnet_name" {
 
 variable "kube_version_prefix" {
   description = "AKS Kubernetes version prefix. Formatted '[Major].[Minor]' like '1.18'. Patch version part (as in '[Major].[Minor].[Patch]') will be set to latest automatically."
-  default     = "1.18"
+  default     = "1.19"
 }
 
 variable "kube_resource_group_name" {
   description = "The resource group name to be created"
-  default     = "aksprivatecluster"
+  default     = "nopublicipaks"
 }
 
 variable "nodepool_nodes_count" {
@@ -45,10 +45,10 @@ variable "network_docker_bridge_cidr" {
 
 variable "network_dns_service_ip" {
   description = "CNI DNS service IP"
-  default     = "192.2.0.10"
+  default     = "10.2.0.10"
 }
 
 variable "network_service_cidr" {
   description = "CNI service cidr"
-  default     = "192.2.0.0/24"
+  default     = "10.2.0.0/24"
 }
