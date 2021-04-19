@@ -11,42 +11,42 @@ GitOps:
 Istio: 
 
 ## Deployment
-# Script to execute from bash shell
+## Script to execute from bash shell
 
-# Login to your Azure Active Directory tenant
+## Login to your Azure Active Directory tenant
 
 ```bash
 az login -t {TENANTNID}
 ```
-# Make sure you are using the right subscription
+## Make sure you are using the right subscription
 
 ```bash
 az account show -o table
 ```
-# If you are not in the correct subscription, change it substituting SUBSCRIPTIONID with the proper subscription  id
+## If you are not in the correct subscription, change it substituting SUBSCRIPTIONID with the proper subscription  id
 
 ```bash
 az account set --subscription {SUBSCRIPTIONID}
 ```
-# If you are running in Azure Cloud Shell, you need to run the following additional command:
+## If you are running in Azure Cloud Shell, you need to run the following additional command:
 ```bash
 export TF_VAR_logged_user_objectId=$(az ad signed-in-user show --query objectId -o tsv)
 ```
-# Go to the AKS construction set folder 
+## Go to the AKS construction set folder 
 ```bash
 cd enterprise_scale/construction_sets/aks
 
 configuration_folder=online/aks_secure_baseline/configuration
 ```
-# Define the configuration files to apply, all tfvars files within the above folder recursively
+## Define the configuration files to apply, all tfvars files within the above folder recursively
 ```bash
 parameter_files=$(find $configuration_folder | grep .tfvars | sed 's/.*/-var-file &/' | xargs)
 ```
-# Load the CAF module and related providers
+## Load the CAF module and related providers
 ```bash
 terraform init -upgrade
 ```
-# Trigger the deployment of the resources
+## Trigger the deployment of the resources
 ```bash
 eval terraform apply ${parameter_files}
 ```
@@ -72,16 +72,16 @@ kubectl config use-context <yourClusterName>
 
 To assign Admin role 
 
-# Get the resource ID of your AKS cluster
+## Get the resource ID of your AKS cluster
 ```bash
 AKS_CLUSTER=$(az aks show --resource-group rampup-rg-aks-re1 --name rampup-aks-akscluster-re1-001 --query id -o tsv)
 ```
-# Get the account credentials for the logged in user
+## Get the account credentials for the logged in user
 ```bash
 ACCOUNT_UPN=$(az account show --query user.name -o tsv)
 ACCOUNT_ID=$(az ad user show --id $ACCOUNT_UPN --query objectId -o tsv)
 ```
-# Assign the 'Cluster Admin' role to the user
+## Assign the 'Cluster Admin' role to the user
 ```bash
 az role assignment create \
     --assignee $ACCOUNT_ID \
@@ -89,7 +89,7 @@ az role assignment create \
     --role "Azure Kubernetes Service Cluster Admin Role"
 ```
 
-# Kubectl Alias
+## Kubectl Alias
 
 To use a shorthand alias for kubectl given below some example for full list visit [kubectl alias](https://github.com/ahmetb/kubectl-aliases)
 ```kubectl
