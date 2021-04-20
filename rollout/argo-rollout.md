@@ -1,3 +1,5 @@
+# Kubernetes Deployment Strategies
+
 This article focuses on Kubernetes different deployment strategies and how to achieve them. We will also focus on the pros and cons of different deployment strategies.
 There are several different types of deployment strategies you can take advantage of depending on your organization / application requirements goal.
 
@@ -33,3 +35,17 @@ kubectl argo rollouts get rollout rollouts-demo-canary --watch
 
 kubectl port-forward svc/rollouts-demo-canary 8080:80
 
+## Blue Green Deployement 
+In a blue/green deployment strategy (sometimes referred to as red/black) the old version of the application (green) and the new version (blue) get deployed at the same time. When both of these are deployed, users only have access to the green; whereas, the blue is available to your QA team for test automation on a separate service or via direct port-forwarding.
+
+![localhost](./images/bluegreen.png)
+## To watch Blue Green deployment 
+```kube
+kubectl argo rollouts get rollout rollout-bluegreen --watch
+```
+
+## Port forwaring for User and QA
+``kube
+kubectl port-forward svc/rollout-bluegreen-active 8082:80
+kubectl port-forward svc/rollout-bluegreen-preview 8083:80
+```
