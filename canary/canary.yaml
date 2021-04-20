@@ -25,29 +25,20 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
-  # strategy:
-  #   canary:
-  #     steps:
-  #     - setWeight: 20
-  #     # The following pause step will pause the rollout indefinitely until manually resumed.
-  #     # Rollouts can be manually resumed by running `kubectl argo rollouts promote ROLLOUT`
-  #     - pause: {}
-  #     - setWeight: 40
-  #     - pause: {duration: 10s}
-  #     - setWeight: 60
-  #     - pause: {duration: 10s}
-  #     - setWeight: 80
-  #     - pause: {duration: 10s}
-    strategy:
-    canary: #Indicates that the rollout should use the Canary strategy
-      maxSurge: "25%"
-      maxUnavailable: 0
+  strategy:
+    canary:
       steps:
-      - setWeight: 10
-      - pause:
-          duration: 1h # 1 hour
       - setWeight: 20
-      - pause: {} # pause indefinitely
+      # The following pause step will pause the rollout indefinitely until manually resumed.
+      # Rollouts can be manually resumed by running `kubectl argo rollouts promote ROLLOUT`
+      - pause: {}
+      - setWeight: 40
+      - pause: {duration: 10s}
+      - setWeight: 60
+      - pause: {duration: 10s}
+      - setWeight: 80
+      - pause: {duration: 10s}
+
 --- 
 apiVersion: v1
 kind: Service
