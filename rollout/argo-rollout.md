@@ -16,3 +16,7 @@ sudo mv ./kubectl-argo-rollouts-linux-amd64 /usr/local/bin/kubectl-argo-rollouts
 kubectl argo rollouts version
 
 Agro CD Deploy
+
+kubectl argo rollouts get rollout rollouts-demo --watch
+
+kubectl port-forward svc/rollouts-demo 8080:80
