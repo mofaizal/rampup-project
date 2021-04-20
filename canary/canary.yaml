@@ -14,7 +14,7 @@ spec:
         app: rollout-canary
     spec:
       containers:
-      - name: rollouts-demo
+      - name: rollouts-demo-canary
         image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rollouts-demo
+  name: rollouts-demo-canary
 spec:
   ports:
   - port: 80
@@ -45,4 +45,4 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: rollouts-demo
+    app: rollouts-demo-canary
