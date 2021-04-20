@@ -11,7 +11,7 @@
 #   selector:
 #     app: rollouts-demo
 
-apiVersion: flagger.app/v1beta1
+apiVersion: v1
 kind: Canary
 metadata:
   name: rollouts-demo
