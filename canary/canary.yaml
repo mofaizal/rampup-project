@@ -18,7 +18,13 @@ spec:
         image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m
   strategy:
     canary:
       steps:
@@ -32,7 +38,6 @@ spec:
       - pause: {duration: 20s}
       - setWeight: 80
       - pause: {duration: 20s}
-
 --- 
 apiVersion: v1
 kind: Service
@@ -46,3 +51,6 @@ spec:
     name: http
   selector:
     app: rollouts-demo-canary
+
+
+    
