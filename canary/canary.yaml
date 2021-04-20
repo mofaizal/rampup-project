@@ -18,7 +18,7 @@ spec:
         image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
-        - name: http\
+        - name: http
           containerPort: 8080
           protocol: TCP
         resources:
