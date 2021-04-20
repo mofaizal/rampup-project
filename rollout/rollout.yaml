@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:yellow
+        image: argoproj/rollouts-demo:blue
         ports:
         - name: http
           containerPort: 8080
@@ -36,16 +36,3 @@ spec:
             memory: 32Mi
             cpu: 5m
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rollouts-demo
-spec:
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
-  selector:
-    app: rollouts-demo
