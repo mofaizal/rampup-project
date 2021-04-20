@@ -20,3 +20,7 @@ Agro CD Deploy
 kubectl argo rollouts get rollout rollouts-demo --watch
 
 kubectl port-forward svc/rollouts-demo 8080:80
+
+
+kubectl argo rollouts abort rollouts-demo
+
