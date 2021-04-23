@@ -1,4 +1,4 @@
-apiVersion: argoproj.io/v1alpha1
+apiVersion: apps/v1 #argoproj.io/v1alpha1
 kind: Deployment #Rollout
 metadata:
   name: rollouts-demo-canary
@@ -40,7 +40,7 @@ spec:
   #     - pause: {duration: 10s}
 
 ---
-# apiVersion: argoproj.io/v1alpha1
+# apiVersion: apps/v1 #argoproj.io/v1alpha1
 # kind: Deployment #Rollout
 # metadata:
 #   name: rollouts-demo-canary-yellow
