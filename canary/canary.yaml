@@ -1,9 +1,11 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+# apiVersion: argoproj.io/v1alpha1
+# kind: Rollout
+apiVersion: apps/v1 #argoproj.io/v1alpha1
+kind: Deployment #Rollout
 metadata:
   name: rollouts-demo-canary
 spec:
-  replicas: 5
+  replicas: 3
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -12,6 +14,7 @@ spec:
     metadata:
       labels:
         app: rollouts-demo-canary
+        version: blue
     spec:
       containers:
       - name: rollouts-demo-canary
@@ -25,48 +28,51 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
-  strategy:
-    canary:
-      steps:
-      - setWeight: 30
-      # The following pause step will pause the rollout indefinitely until manually resumed.
-      # Rollouts can be manually resumed by running `kubectl argo rollouts promote ROLLOUT`
-      - pause: {}
-      #- setWeight: 40
-      #- pause: {duration: 10s}
-      - setWeight: 60
-      - pause: {duration: 10s}
-      - setWeight: 80
-      - pause: {duration: 10s}
+  # strategy:
+  #   canary:
+  #     steps:
+  #     - setWeight: 30
+  #     # The following pause step will pause the rollout indefinitely until manually resumed.
+  #     # Rollouts can be manually resumed by running `kubectl argo rollouts promote ROLLOUT`
+  #     - pause: {}
+  #     #- setWeight: 40
+  #     #- pause: {duration: 10s}
+  #     - setWeight: 60
+  #     - pause: {duration: 10s}
+  #     - setWeight: 80
+  #     - pause: {duration: 10s}
 
 ---
-# apiVersion: apps/v1 #argoproj.io/v1alpha1
-# kind: Deployment #Rollout
-# metadata:
-#   name: rollouts-demo-canary-yellow
-# spec:
-#   replicas: 2
-#   revisionHistoryLimit: 2
-#   selector:
-#     matchLabels:
-#       app: rollouts-demo-canary
-#   template:
-#     metadata:
-#       labels:
-#         app: rollouts-demo-canary
-#     spec:
-#       containers:
-#       - name: rollouts-demo-canary
-#         image: argoproj/rollouts-demo:yellow
-#         imagePullPolicy: Always
-#         ports:
-#         - name: http
-#           containerPort: 8080
-#           protocol: TCP
-#         resources:
-#           requests:
-#             memory: 32Mi
-#             cpu: 5m
+apiVersion: apps/v1 #argoproj.io/v1alpha1
+kind: Deployment #Rollout
+# apiVersion: argoproj.io/v1alpha1
+# kind: Rollout
+metadata:
+  name: rollouts-demo-canary-yellow
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollouts-demo-canary
+  template:
+    metadata:
+      labels:
+        app: rollouts-demo-canary
+        version: yellow
+    spec:
+      containers:
+      - name: rollouts-demo-canary-yellow
+        image: argoproj/rollouts-demo:yellow
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m
 --- 
 apiVersion: v1
 kind: Service
