@@ -11,7 +11,7 @@ Create - to-do app using Argo-CD
 Show sync demo deployment via Argo CD
 
 kubectl port-forward svc/frontendtodo 8081:80
-
+kubectl port-forward svc/guestbook-ui 8081:80
 gcr.io,github.com,storage.googleapis.com,*.googleapis.com,ghcr.io
 
 
