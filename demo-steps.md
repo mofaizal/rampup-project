@@ -15,7 +15,6 @@ kubectl port-forward svc/guestbook-ui 8081:80
 gcr.io,github.com,storage.googleapis.com,*.googleapis.com,ghcr.io
 
 
-
 Now deploy Gustbook application via Argo CD
 Update Image to new version show the out of sycn in ArgoCD
 Roll out the changes
@@ -26,6 +25,9 @@ Auto update
 Canary Roll out
 
 Blue Green Roll out
+kubectl port-forward svc/rollout-bluegreen-active 8082:80
+kubectl port-forward svc/rollout-bluegreen-preview 8083:80
+
 
 kubectl patch svc fleetman-webapp -p '{"spec": {"type": "LoadBalancer"}}'
 
