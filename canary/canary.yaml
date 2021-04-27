@@ -1,7 +1,7 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Rollout
-apiVersion: apps/v1 #argoproj.io/v1alpha1
-kind: Deployment #Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+# apiVersion: apps/v1 #argoproj.io/v1alpha1
+# kind: Deployment #Rollout
 metadata:
   name: rollouts-demo-canary
 spec:
