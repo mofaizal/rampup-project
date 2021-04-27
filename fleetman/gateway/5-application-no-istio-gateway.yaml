@@ -80,10 +80,34 @@ spec:
     metadata:
       labels:
         app: webapp
+        version: original
     spec:
       containers:
       - name: webapp
         image: richardchesterwood/istio-fleetman-webapp-angular:6
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: production-microservice
+        imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-experimental
+spec:
+  selector:
+    matchLabels:
+      app: webapp
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: webapp
+        version: experimental
+    spec:
+      containers:
+      - name: webapp
+        image: richardchesterwood/istio-fleetman-webapp-angular:6-experimental
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
@@ -119,16 +143,16 @@ spec:
   selector:
     matchLabels:
       app: staff-service
-  replicas: 1
+  replicas: 0
   template: # template for the pods
     metadata:
       labels:
         app: staff-service
-        version: current
+        version: safe
     spec:
       containers:
-      - image: richardchesterwood/istio-fleetman-staff-service:6-placeholder
-        name: staff-service        
+      - name: staff-service
+        image: richardchesterwood/istio-fleetman-staff-service:6-placeholder
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
@@ -139,7 +163,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: staff-service-new-version
+  name: staff-service-risky-version
 spec:
   selector:
     matchLabels:
@@ -149,7 +173,7 @@ spec:
     metadata:
       labels:
         app: staff-service
-        version: new-version
+        version: risky
     spec:
       containers:
       - name: staff-service
@@ -161,21 +185,20 @@ spec:
         ports:
         - containerPort: 8080
 ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: fleetman-webapp
-# spec:
-#   # This defines which pods are going to be represented by this Service
-#   # The service becomes a network endpoint for either other services
-#   # or maybe external users to connect to (eg browser)
-#   selector:
-#     app: webapp
-#   ports:
-#     - name: http
-#       port: 80
-#       nodePort: 30081
-#   type: NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-webapp
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: webapp
+  ports:
+    - name: http
+      port: 80
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
