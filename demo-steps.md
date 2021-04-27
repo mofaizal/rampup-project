@@ -23,6 +23,8 @@ Roll back the changes
 Auto update
 
 Canary Roll out
+kubectl port-forward svc/rollouts-demo-canary 8082:80
+
 
 Blue Green Roll out
 kubectl port-forward svc/rollout-bluegreen-active 8082:80
