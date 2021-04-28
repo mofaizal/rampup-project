@@ -31,10 +31,13 @@ kubectl port-forward svc/rollout-bluegreen-active 8082:80
 kubectl port-forward svc/rollout-bluegreen-preview 8083:80
 
 
+Switch Cluster profile 
+
+kubectl config use-context ramupaks-admin 
+
 kubectl patch svc fleetman-webapp -p '{"spec": {"type": "LoadBalancer"}}'
 
-
-Istio Demo Steps
+Istio Demo
 
 Istio CTL path set
 export PATH=/home/faizal/rampup-project/istio/istio-1.9.3/bin:$PATH
@@ -58,11 +61,9 @@ kubectl port-forward -n istio-system svc/zipkin 8081:9411
 
 DELETE TRAFIC Routing. 
 
-while true; do curl -s http://Public-IP/ | grep title; slpee 0.5; done
+while true; do curl -s http://Public-IP/ | grep title; sleep 0.5; done
 
-while true; do curl -s http://10.0.128.232:32394/ | grep title; slpee 0.5; done
+while true; do curl -s http://10.0.128.232:32394/ | grep title; sleep 0.5; done
 kubectl port-forward -n istio-system svc/istio-ingressgateway 8082:32394
 
 while true; do curl 20.43.168.195/api/vehicle/driver/City%20Truck; echo; done
-
-
