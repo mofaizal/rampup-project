@@ -15,7 +15,7 @@ Listed 3 key important benefit Why GitOps? to learn about more refer to [GitOps.
 - Your production environment is down! With GitOps you have a complete history of how your environment changed over time. This makes error recovery as easy as issuing a git revert and watching your environment being restored.
 - GitOps allows you to manage deployments completely from inside your environment. For that, your environment only needs access to your repository and image registry. That’s it. You don’t have to give your developers direct access to the environment.
 
-## What shall I use? Argo or Flux or Junkins X?” come up regularly. Here is my point of view
+## What shall I use? Argo or Flux or Jenkins X ?” come up regularly. Here is my point of view
 
 Let us look at [Flux](https://fluxcd.io/), the Flux installation is straight forward and easy you can install using based on [Helm Charts](https://docs.fluxcd.io/en/1.19.0/tutorials/get-started-helm/) and [Kustomize](https://docs.fluxcd.io/en/1.19.0/tutorials/get-started-kustomize/) the deployment of manifest happen true GitOps fashion the Flux pull changes from remote Git repo. If like to trigger changes manually you use fluxctl sycn to synchronization.
 
