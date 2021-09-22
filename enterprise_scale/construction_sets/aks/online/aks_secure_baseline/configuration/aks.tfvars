@@ -17,7 +17,7 @@ aks_clusters = {
       type = "SystemAssigned"
     }
 
-    kubernetes_version = "1.19.7"
+    kubernetes_version = "1.21.2"
     vnet_key           = "vnet_aks_re1"
 
     network_profile = {
